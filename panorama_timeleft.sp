@@ -4,8 +4,8 @@ public Plugin myinfo =
 {
 	name = "Panorama - Timeleft",
 	author = "Fastmancz",
-	description = "Shows Timeleft at the bottom of the screen",
-	version = "1.0.0"
+	description = "Shows timeleft at the bottom of the screen",
+	version = "1.0.1"
 };
 
 public void OnPluginStart()
@@ -15,20 +15,23 @@ public void OnPluginStart()
 
 public Action Timeleft(Handle timer)
 {
-	char time[60];
+	char sTime[60];
 	int iTimeleft;
 
 	GetMapTimeLeft(iTimeleft);
-	FormatTime(time, sizeof(time), "%M:%S", iTimeleft);
-
-	for(int i = 1; i <= MaxClients; i++)
+	if(iTimeleft > 0)
 	{
-		if(IsClientInGame(i) && !IsFakeClient(i))
+		FormatTime(sTime, sizeof(sTime), "%M:%S", iTimeleft);
+
+		for(int i = 1; i <= MaxClients; i++)
 		{
-			char message[60];
-			Format(message, sizeof(message), "Timeleft: %s", time);
-			SetHudTextParams(-1.0, 1.00, 1.0, 4, 180, 255, 255, 0, 0.00, 0.00, 0.00);
-			ShowHudText(i, -1, message);
+			if(IsClientInGame(i) && !IsFakeClient(i))
+			{
+				char message[60];
+				Format(message, sizeof(message), "Timeleft: %s", sTime);
+				SetHudTextParams(-1.0, 1.00, 1.0, 4, 180, 255, 255, 0, 0.00, 0.00, 0.00);
+				ShowHudText(i, -1, message);
+			}
 		}
 	}
 	return Plugin_Continue;
