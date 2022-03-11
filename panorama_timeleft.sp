@@ -28,7 +28,7 @@ public Action Timeleft(Handle timer)
 			if(IsClientInGame(i) && !IsFakeClient(i))
 			{
 				char message[60];
-				Format(message, sizeof(message), "Timeleft: %s", sTime);
+				Format(message, sizeof(message), "До конца карты: %s", sTime);
 				SetHudTextParams(-1.0, 1.00, 1.0, 4, 180, 255, 255, 0, 0.00, 0.00, 0.00);
 				ShowHudText(i, -1, message);
 			}
